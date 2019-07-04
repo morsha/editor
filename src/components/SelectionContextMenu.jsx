@@ -353,11 +353,27 @@ function SelectionContextMenu({
   ) : null), [linkModalShown, modalPosX, modalPosY, markLink]);
 
   useEffect(() => {
-    setModalPosition({
-      x: menuPosX - 120,
-      y: menuPosY + 68,
-    });
-  }, [menuPosX, menuPosY]);
+    if (!view) return;
+
+    const viewBBox = view.getBoundingClientRect();
+
+    if (menuPosX - 120 < 0) {
+      setModalPosition({
+        x: 0,
+        y: menuPosY + 68,
+      });
+    } else if (menuPosX + 180 > viewBBox.width) {
+      setModalPosition({
+        x: viewBBox.width - 360,
+        y: menuPosY + 68,
+      });
+    } else {
+      setModalPosition({
+        x: menuPosX - 120,
+        y: menuPosY + 68,
+      });
+    }
+  }, [menuPosX, menuPosY, view]);
 
   const tooltip = useMemo(() => (focus && !shown ? (
     <div style={styles.tooltipWrapper}>
