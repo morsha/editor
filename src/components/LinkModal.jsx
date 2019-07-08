@@ -43,6 +43,10 @@ const styles = {
     overflow: 'visible',
     position: 'relative',
   },
+  enterText: {
+    color: '#1BDCDC',
+    margin: '0 0 0 0.5em',
+  },
 };
 
 function LinkModal({
@@ -100,7 +104,13 @@ function LinkModal({
   return (
     <div style={wrapperStyles}>
       <div style={styles.linkEditor}>
-        <h6 style={metaStyles.metaModalTitle}>Link</h6>
+        <h6 style={metaStyles.metaModalTitle}>
+          Link (press
+          <span style={styles.enterText}>
+            Enter
+          </span>
+          )
+        </h6>
         <button
           onClick={close}
           style={metaStyles.removeBtn}
